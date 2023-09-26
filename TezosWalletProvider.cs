@@ -119,7 +119,7 @@ namespace InfinitySDK.Scripts.Provider
                 _publicKey = publicKey;
                 _walletData = new WalletData
                 {
-                    WalletAddress = address, /*PublicKey = publicKey,*/ ChainID = "0", IdentType = IdentType.TezosWallet
+                    WalletAddress = address, PublicKey = publicKey, ChainID = "0", IdentType = IdentType.TezosWallet
                 };
                 _connectionTcs?.TrySetResult(_walletData);
                 Connected?.Invoke(_walletData);
