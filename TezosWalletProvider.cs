@@ -6,6 +6,7 @@ using Beacon.Sdk.Beacon.Sign;
 using Surf.Helpers;
 using Surf.Logger;
 using Surf.Model;
+using Surf.Platform.Client;
 using Surf.WalletProvider.Interface;
 using TezosSDK.Tezos;
 using TezosSDK.Tezos.Wallet;
@@ -116,7 +117,10 @@ namespace InfinitySDK.Scripts.Provider
                 }
                 
                 _publicKey = publicKey;
-                _walletData = new WalletData { WalletAddress = address, /*PublicKey = publicKey,*/ ChainID = "0" };
+                _walletData = new WalletData
+                {
+                    WalletAddress = address, /*PublicKey = publicKey,*/ ChainID = "0", IdentType = IdentType.TezosWallet
+                };
                 _connectionTcs?.TrySetResult(_walletData);
                 Connected?.Invoke(_walletData);
             });
