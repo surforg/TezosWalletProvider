@@ -42,9 +42,9 @@ namespace InfinitySDK.Scripts.Provider
         private string _publicKey;
 
         private WalletData _walletData;
-        private NetworkConfig _config;
+        private WalletProviderNetworkConfig _config;
         
-        public async Task Initialize(NetworkConfig config)
+        public async Task Initialize(WalletProviderNetworkConfig config)
         {
             _config = config;
             SetNetwork(config);
@@ -58,11 +58,11 @@ namespace InfinitySDK.Scripts.Provider
             return;
         }
 
-        private void SetNetwork(NetworkConfig config)
+        private void SetNetwork(WalletProviderNetworkConfig config)
         {
             switch (config)
             {
-                case NetworkConfig.Mainnet:
+                case WalletProviderNetworkConfig.Mainnet:
                     TezosConfig.Instance.Network = NetworkType.mainnet;
                     break;
                 default:
