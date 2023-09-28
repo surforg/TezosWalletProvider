@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Beacon.Sdk.Beacon.Permission;
 using Beacon.Sdk.Beacon.Sign;
+using Surf.EditorUtility.Configs;
 using Surf.Helpers;
 using Surf.Logger;
 using Surf.Model;
@@ -11,6 +13,7 @@ using Surf.WalletProvider.Interface;
 using TezosSDK.Tezos;
 using TezosSDK.Tezos.Wallet;
 using UnityEngine;
+using IWalletProvider = Surf.WalletProvider.Interface.IWalletProvider;
 
 namespace InfinitySDK.Scripts.Provider
 {
@@ -39,9 +42,13 @@ namespace InfinitySDK.Scripts.Provider
         private string _publicKey;
 
         private WalletData _walletData;
+        private NetworkConfig _config;
         
-        public async Task Initialize()
+        public async Task Initialize(NetworkConfig config)
         {
+            _config = config;
+            SetNetwork(config);
+            
             _tezos = new Tezos();
             _tezos.MessageReceiver.AccountConnected += OnAccountConnected;
             _tezos.MessageReceiver.AccountDisconnected += OnAccountDisconnected;
@@ -50,9 +57,23 @@ namespace InfinitySDK.Scripts.Provider
             _tezos.MessageReceiver.PayloadSigned += OnPayloadSigned;
             return;
         }
+
+        private void SetNetwork(NetworkConfig config)
+        {
+            switch (config)
+            {
+                case NetworkConfig.Mainnet:
+                    TezosConfig.Instance.Network = NetworkType.mainnet;
+                    break;
+                default:
+                    TezosConfig.Instance.Network = NetworkType.ghostnet;
+                    break;
+            }
+        }
         
         public async Task<WalletData> ConnectToWallet()
         {
+            SetNetwork(_config);
             _connectionTcs = new TaskCompletionSource<WalletData>();
             SurfLogger.Log($"Going for connection");
             _tezos.Wallet.Connect(WalletProviderType.beacon);
@@ -62,6 +83,7 @@ namespace InfinitySDK.Scripts.Provider
 
         public async Task<MessageSignData> Sign(string walletAddress, string challenge)
         {
+            SetNetwork(_config);
             _payload = challenge;
             _signingTcs = new TaskCompletionSource<MessageSignData>();
             SurfLogger.Log($"Going for signing");
@@ -83,6 +105,7 @@ namespace InfinitySDK.Scripts.Provider
 
         public void Disconnect()
         {
+            SetNetwork(_config);
             _disconnectionTcs = new TaskCompletionSource<string>();
             SurfLogger.Log($"Going for disconnection");
 #if UNITY_ANDROID
