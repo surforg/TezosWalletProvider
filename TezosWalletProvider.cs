@@ -108,13 +108,14 @@ namespace InfinitySDK.Scripts.Provider
             SetNetwork(_config);
             _disconnectionTcs = new TaskCompletionSource<string>();
             SurfLogger.Log($"Going for disconnection");
-#if UNITY_ANDROID
+#if !UNITY_ANDROID
             _tezos.Wallet.Disconnect();
             return;
 #endif
-            var tmp = _walletData;
+            _tezos.Wallet.Disconnect();
+            // var tmp = _walletData;
             _walletData = null;
-            Disconnected?.Invoke(tmp);
+            //Disconnected?.Invoke(tmp);
         }
         private void OnAccountConnected(string result)
         {
