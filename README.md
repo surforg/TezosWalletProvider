@@ -5,6 +5,7 @@
 ## Table of Contents
 
 - [Connections and SDK API](#events-and-callbacks)
+- [NFT API](#nft-api)
 - [Game Room API](#game-room-api)
 - [Storage API](#storage-api)
 - [Token Balance API](#token-balance-api)
@@ -138,6 +139,19 @@
         // Your code here
     }
     ```
+### 🔄 GetConnectionType
+
+**Description:** Get the current connection type based on the user's login data.
+
+- **Returns:** A `ConnectionType` representing the user's connection type, which can be one of the following:
+    - `ConnectionType.None`: No connection
+    - `ConnectionType.Social`: Social connection
+    - `ConnectionType.NonSocial`: Non-social connection
+
+- **Usage:**
+    ```csharp
+    var connectionType = SurfApi.GetConnectionType();
+    ```
 
 ### 🔄 GameRoomsUpdated
 
@@ -189,8 +203,22 @@
     ```csharp
     SurfApi.DisconnectWallet();
     ```
+## NFT API
 
-## [Game Room API]
+### 🖼️ GetNFTs {#get-nfts}
+
+**Description:** Gets the user's NFTs if any.
+
+- **Requires:** Wallet connection.
+
+- **Returns:** A `Task<List<NFT>>` containing a list of NFTs.
+
+- **Usage:**
+    ```csharp
+    var nfts = await SurfApi.GetNFTs();
+    ```
+    
+## Game Room API
 
 ### 🚀 JoinRoom
 
@@ -226,8 +254,8 @@
 
 ### 🏆 GetMatchResults
 
-**Description:** Use this to get game histories.
-- **Returns:** List of Game History, ordered in descending order. Meaning, the 0th index is the most recent match.
+**Description:** Use this to get match results.
+- **Returns:** List of match results, ordered in descending order. Meaning, the 0th index is the most recent match.
 - **Usage:**
     ```csharp
     var matchResults = await SurfApi.GetMatchResults();
@@ -235,7 +263,7 @@
 
 ### 🏆 GetMatchRankings
 
-**Description:** Use this to get game histories.
+**Description:** Use this to get match rankings.
 - **Parameters:**
     - `playID`: PlayID
 - **Usage:**
