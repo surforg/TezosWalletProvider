@@ -391,7 +391,7 @@
         // Your code here to handle storage data changes
     }
     ```
-## [Token Balance API]
+## Token Balance API
 Usually in your game, all players are going to have a soft currency + hard currency. Hard currency is going to be change based on user's connection type. User's who connected via tezos wallet will have xtz currency and user's who connected via social wallet will have fiat(USD) currency 
 
 ### 🌟 GetBalances
