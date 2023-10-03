@@ -4,7 +4,7 @@
 
 ## Table of Contents
 
-- [Connections and SDK API](#events-and-callbacks)
+- [Connections and SDK API](#connections-and-sdk-api)
 - [NFT API](#nft-api)
 - [Game Room API](#game-room-api)
 - [Storage API](#storage-api)
@@ -12,7 +12,7 @@
 - [Remote Config API](#remote-config-api)
 - [Reward APIs](#reward-api)
 
-## Events and Callbacks
+## Connections and SDK API
 
 ### 🚀 SdkReady
 
