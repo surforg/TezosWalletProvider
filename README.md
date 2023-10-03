@@ -11,12 +11,6 @@
 - [Remote Config API](#remote-config-api)
 - [Reward APIs](#reward-api)
 
-- `ConnectionType`
-    - Enumeration representing connection types:
-        - `None`: No connection
-        - `NonSocial`: Non-social connection
-        - `Social`: Social connection
-
 ## Events and Callbacks
 
 ### 🚀 SdkReady
