@@ -4,12 +4,12 @@
 
 ## Table of Contents
 
-- [Connections and SDK API](events-and-callbacks)
-- [Game Room API](game-room-api)
-- [Storage API](storage-api)
-- [Token Balance API](token-balance-api)
-- [Remote Config API](remote-config-api)
-- [Reward APIs](reward-api)
+- [Connections and SDK API](#events-and-callbacks)
+- [Game Room API](#game-room-api)
+- [Storage API](#storage-api)
+- [Token Balance API](#token-balance-api)
+- [Remote Config API](#remote-config-api)
+- [Reward APIs](#reward-api)
 
 - `ConnectionType`
     - Enumeration representing connection types:
@@ -17,7 +17,7 @@
         - `NonSocial`: Non-social connection
         - `Social`: Social connection
 
-## 📅 [Events and Callbacks](events-and-callbacks)
+## Events and Callbacks
 
 ### 🚀 SdkReady
 
@@ -196,7 +196,7 @@
     SurfApi.DisconnectWallet();
     ```
 
-## [Game Room API](game-room-api)
+## [Game Room API]
 
 ### 🚀 JoinRoom
 
@@ -264,7 +264,7 @@
     var remoteConfig = await SurfApi.GetRemoteConfig();
     ```
 
-## [Reward API](reward-api)
+## [Reward API]
 
 ### 🎁 CheckReward
 
@@ -293,7 +293,7 @@
     ```csharp
     var currencyAmount = await SurfApi.ClaimReward(rewardClaimRequest);
     ```
-## [Storage API](storage-api)
+## [Storage API]
 
 ### 📦 Name
 
@@ -397,7 +397,7 @@
         // Your code here to handle storage data changes
     }
     ```
-## [Token Balance API](token-balance-api)
+## [Token Balance API]
 Usually in your game, all players are going to have a soft currency + hard currency. Hard currency is going to be change based on user's connection type. User's who connected via tezos wallet will have xtz currency and user's who connected via social wallet will have fiat(USD) currency 
 
 ### 🌟 GetBalances
