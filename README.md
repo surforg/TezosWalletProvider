@@ -11,6 +11,7 @@
 - [Token Balance API](#token-balance-api)
 - [Remote Config API](#remote-config-api)
 - [Reward APIs](#reward-api)
+- [Persistent Game Rooms Guide](#persistent-game-rooms-guide)
 
 ## Connections and SDK API
 
@@ -433,3 +434,25 @@ Usually in your game, all players are going to have a soft currency + hard curre
     var tokenBalances = await SurfApi.GetBalances();
     ```
 ---
+
+## Persistent Game Rooms Guide
+When integrating the Surf SDK for handling persistent game rooms, consider the following guidelines to ensure a smooth user experience:
+1. **Use `EnsureSdkReady` Event:** Before loading your lobby or any game-related screens, make sure to subscribe to the `EnsureSdkReady` event to ensure that the Surf SDK is initialized and ready to interact with game rooms.
+2. **Listen for Game Room Update Event:**
+    - Subscribe to the `GameRoomsUpdated` event to receive updates on game room configurations.
+    - Use the event to get room configurations and set up your rooms for matchmaking.
+3. **Joining a Game Room:**
+    - When a user clicks on the "Play" button for a specific game room, call the `JoinRoom` API.
+    - This ensures that the entry fee for the room is deducted from the player's balance when they call the `JoinRoom` API.
+    - If the API does not returns any `errors`, proceed with your match-making and start the game. This ensures that the user can join the room and the game can be initiated.
+    - If the API does return an `error`, you can show an error popup depending on the error that user had, it can be insufficient balance or already in match. In case of an exception, you can show a something went wrong popup.
+4. **Handling Player Results (Server-side API):**
+    - For all players, call the server-side API to report the game results.
+    - Endpoint: `/game-play/result`
+    - Use the API to communicate the final score and rank of each player when they finish playing. This can be because they are eliminated from the game or they exited the game without dying.
+5. **Updating Player Balance (Server-side API):**
+    - When a player decides to exit the game, call the server-side API to update the player's balance.
+    - Endpoint: `/user/balance`
+    - Ensure that the player's balance is correctly adjusted to reflect their participation in the game. USE this api ONLY for documented cases under server-side api documentation
+Server-side API documentation link => https://docs.google.com/document/d/1sHpTzfAYIHVL0aIMZddhM8cwyVFuHj4KmORyjBHiAlQ/
+By following these guidelines, you can effectively implement and manage persistent game rooms using the Surf SDK. Deducting entry fees when players join a room ensures that the game economy is maintained, and using the server-side API for handling player results allows for accurate reporting of game results.
