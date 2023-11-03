@@ -449,7 +449,7 @@ When integrating the Surf SDK for handling persistent game rooms, consider the f
 4. **Handling Player Results (Server-side API):**
     - For all players, call the server-side API to report the game results.
     - Endpoint: `/game-play/result`
-    - Use the API to communicate the final score and rank of each player when they finish playing. This can be because they are eliminated from the game or they exited the game without dying.
+    - Use the API to communicate the final score, rank and reward(optional) of each player when they finish playing. This can be because they are eliminated from the game or they exited the game without dying. If you pass reward field with this endpoint, it will update player's balance aswell so you shouldn't use Update Player Balance API.
 5. **Updating Player Balance (Server-side API):**
     - When a player decides to exit the game, call the server-side API to update the player's balance.
     - Endpoint: `/user/balance`
